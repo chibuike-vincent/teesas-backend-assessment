@@ -9,8 +9,8 @@ import { AuthController } from './auth.controller';
     UserModule,
     JwtModule.register({
       global: true,
-      secret: "teesas_test",
-      signOptions: { expiresIn: '1h' },
+      secret: process.env.JWT_SECRET,
+      signOptions: { expiresIn: process.env.EXPIRES_IN },
     }),
   ],
   providers: [AuthService],

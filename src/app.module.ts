@@ -8,11 +8,11 @@ import { modules } from './customModule';
   imports: [TypeOrmModule.forRoot(
     {
       type: "postgres",
-      host: "postgresql-122371-0.cloudclusters.net",
-      port: 18821,
-      username: "teesas",
-      password: "password1@",
-      database: "teesas",
+      host: process.env.HOST,
+      port: Number(process.env.DB_PORT),
+      username: process.env.DB_USERNAME,
+      password: process.env.DB_PASSWORD,
+      database: process.env.DATABASE,
       entities: ["dist/**/*.entity{.ts,.js}"],
       synchronize: true
     }
