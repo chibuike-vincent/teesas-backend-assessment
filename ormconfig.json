@@ -1,0 +1,11 @@
+{
+    "type": "postgres",
+    "host": "postgresql-122371-0.cloudclusters.net",
+    "port": 18821,
+    "username": "teesas",
+    "password": "password1@",
+    "database": "teesas",
+    "entities": ["dist/**/*.entity{.ts,.js}"],
+    "synchronize": true
+  }
+  
