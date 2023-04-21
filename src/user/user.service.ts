@@ -47,7 +47,7 @@ async deleteUser(id):Promise<User | any>{
 }
 
 async getUserProfile(req):Promise<User | any> {
-    const user = await this.userRepository.findOne({where: {id: req.sub}})
+    const user = await this.userRepository.findOne({where: {id: req.user.sub}})
     delete user.password
     return user
 }
