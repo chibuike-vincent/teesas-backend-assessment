@@ -1,9 +1,14 @@
-import { Body, Controller, Delete, Get, HttpCode, HttpStatus, Param, ParseIntPipe, Patch, Post, Put, Req, Request, UseGuards } from "@nestjs/common";
+import { BadRequestException, Body, Controller, Delete, Get, HttpCode, HttpStatus, Param, ParseIntPipe, Patch, Post, Put, Req, Request, UseGuards } from "@nestjs/common";
 import { ProductService } from './product.service';
 import {CreateProductDto,ProductResponseDto, BuyProductDto} from "./dto/dto"
 import { AuthGuard } from '../auth/auth.guard';
+import { IsDefined, IsNotEmpty } from 'class-validator';
 
-
+export class CreateUserDto {
+  @IsDefined({ message: 'Name is required' })
+  @IsNotEmpty({ message: 'Name should not be empty' })
+  name: string;
+}
 @Controller('api/v1/products')
 export class ProductController {
   constructor(private readonly productService: ProductService) {}
@@ -48,7 +53,7 @@ export class ProductController {
     @UseGuards(AuthGuard)
     @HttpCode(HttpStatus.OK)
     @Post("/buy")
-    buy(@Body() product:BuyProductDto, @Request() req){
+    async buy(@Body() product:BuyProductDto, @Request() req){
         return this.productService.buy(product, req)
     }
 }

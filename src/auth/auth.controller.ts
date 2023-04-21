@@ -2,7 +2,7 @@ import { Body, Controller,HttpCode,Request,
     UseGuards, HttpStatus, Delete, Get, Param, ParseIntPipe, Patch, Post, Put, Req } from "@nestjs/common";
 import { AuthService } from './auth.service';
 import { AuthGuard } from './auth.guard';
-import {createUserDto, LoginDto} from "./dto/dto"
+import {createUserDto, DepositDto, LoginDto, UpdateUserDto} from "./dto/dto"
 
 
 @Controller('api/v1/users')
@@ -37,7 +37,7 @@ export class AuthController {
 
   @UseGuards(AuthGuard)
   @Put("/:id")
-  updateUser(@Param("id", ParseIntPipe) id: number, @Body() data){
+  updateUser(@Param("id", ParseIntPipe) id: number, @Body() data:UpdateUserDto){
       return this.authService.updateUser(id, data)
   }
 
@@ -50,7 +50,7 @@ export class AuthController {
 
   @UseGuards(AuthGuard)
   @Post("/deposit")
-  depositCoin(@Body() coins: number[], @Request() req){
+  depositCoin(@Body() coins: DepositDto, @Request() req){
     return this.authService.depositCoin(coins,req)
   }
 

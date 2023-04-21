@@ -1,24 +1,46 @@
-import { IsNumber, IsString } from "class-validator";
+import { ArrayNotEmpty, IsArray, IsDefined, IsEnum, IsNotEmpty, IsNumber, IsOptional, IsString } from "class-validator";
 
+export enum UserRole{
+    BUYER = "buyer",
+    SELLER = "seller"
+}
 export class createUserDto{
 
+    @IsDefined()
+    @IsNotEmpty()
     @IsString()
     username: string;
 
+    @IsDefined()
+    @IsNotEmpty()
     @IsString()
     password: string;
 
-    @IsString()
-    role: string;
+    @IsDefined()
+    @IsNotEmpty()
+    @IsEnum(UserRole, { message: 'Role should be either buyer or seller' })
+    role: UserRole;
 }
 
 export class LoginDto{
 
+    @IsDefined()
+    @IsNotEmpty()
     @IsString()
     username: string;
 
+    @IsDefined()
+    @IsNotEmpty()
     @IsString()
     password: string;
+}
+
+export class DepositDto{
+
+    @IsArray()
+    @ArrayNotEmpty()
+    @IsNumber({}, { each: true, message: 'Each item in coins should be a number' })
+    coins: number[];
 }
 
 export class UserResponseDto{
@@ -37,12 +59,16 @@ export class UserResponseDto{
 }
 
 export class UpdateUserDto{
+
     @IsString()
+    @IsOptional()
     username: string;
 
     @IsNumber()
+    @IsOptional()
     deposit: number;
 
     @IsString()
-    role: string;
+    @IsOptional()
+    role: UserRole;
 }
