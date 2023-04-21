@@ -23,7 +23,9 @@ import { modules } from './customModule';
       entities: ["dist/**/*.entity{.ts,.js}"],
       synchronize: true
     }
-  ),...modules],
+  ),
+  ...modules
+  ],
   controllers: [AppController],
   providers: [AppService],
 })

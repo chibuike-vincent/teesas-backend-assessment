@@ -11,7 +11,6 @@ import { Repository } from 'typeorm';
 import { CreateProductDto, ProductResponseDto } from './dto/dto';
 import { checkSellerRole, checkBuyerRole } from '../utils/validateRole';
 import { User } from '../database/entities/user.entity';
-import { validate } from 'class-validator';
 
 @Injectable()
 export class ProductService {
